@@ -17,16 +17,33 @@ data = data %>% rename(data='datahora')
 data = data %>% rename(populacao='pop')
 data = data %>% rename(semana_epidemiologica='semana_epidem')
 data = subset(data, select = -codigo_ibge)
+data = subset(data, select = -casos_novos)
+data = subset(data, select = -obitos_novos)
 data$casos_mm7d = gsub(',', '.', data$casos_mm7d) %>% as.numeric()
 data$obitos_mm7d = gsub(',', '.', data$obitos_mm7d) %>% as.numeric()
 data$data = as.Date(data$data)
+data$casos_por_habitante = data$casos / data$populacao
+data$obitos_por_habitante = data$obitos / data$populacao
+data$obitos_por_caso = data$obitos / data$casos
 
 
 s = data %>% filter(
-                toupper(municipio) %in% c('CAMPINAS', 'SÃO PAULO', 'GUARULHOS') &
+                toupper(municipio) %in% c('SÃO CARLOS', 'RIBEIRÃO PRETO', 'GUARULHOS') &
                 data > as.Date('2021-01-01') &
                 data < as.Date('2023-01-01')
              )
+
+
+totals = s %>% 
+  arrange(municipio, data) %>%
+  group_by(municipio) %>%
+  summarise(
+    total_casos = max(casos),
+    total_obitos = max(obitos),
+    media_obitos_por_caso = mean(obitos_por_caso),
+    media_casos_por_habitante = mean(casos_por_habitante),
+    media_obitos_por_habitante = mean(obitos_por_habitante)
+  )
 
 ggplotly(
   s %>% ggplot(aes(x=data, y=casos, group=municipio, color=municipio)) +
@@ -34,9 +51,32 @@ ggplotly(
     labs(
       x=NULL, 
       y='Número de casos', 
-      title='Evolução dos casos por município por data',
+      title='Evolução dos casos por município',
       color = 'Município') +
     theme(plot.title = element_text(hjust = 0.5))
+)
+
+ggplotly(
+  s %>% ggplot(aes(x=data, y=obitos_por_caso, group=municipio, color=municipio)) +
+    geom_line(size=1) +
+    labs(
+      x=NULL, 
+      y='Número de óbitos por caso', 
+      title='Evolução do número de óbitos por caso registrado',
+      color = 'Município') +
+    theme(plot.title = element_text(hjust = 0.5))
+)
+
+ggplotly(
+  s %>% ggplot(aes(x=data, y=obitos, color=municipio)) +
+    geom_line(size=1) +
+    labs(
+      x=NULL,
+      y='Número de óbitos',
+      color='Município',
+      title='Evolução dos óbitos por muncípio'
+    ) +
+    theme(plot.title = element_text(hjust=0.5))
 )
 
 ggplotly(
@@ -51,4 +91,67 @@ ggplotly(
     theme(legend.position = 'none')
 )
 
+ggplotly(
+  totals %>% ggplot(aes(x=municipio, y=total_casos, fill=municipio)) +
+        geom_col() +
+        scale_y_continuous(labels = label_number(scale=1)) +
+        labs(
+          title='Total de casos por município',
+          y='Total de casos',
+          x=NULL
+        ) +
+        theme(legend.position = "none") +
+        theme(plot.title = element_text(hjust=0.5))
+)
 
+ggplotly(
+  totals %>% ggplot(aes(x=municipio, y=total_obitos, fill=municipio)) +
+    geom_col() +
+    scale_y_continuous(labels = label_number(scale=1)) +
+    labs(
+      title='Total de óbitos por município',
+      y='Total de óbitos',
+      x=NULL
+    ) +
+    theme(legend.position = "none") +
+    theme(plot.title = element_text(hjust=0.5))
+)
+
+ggplotly(
+  totals %>% ggplot(aes(x=municipio, y=media_obitos_por_caso, fill=municipio)) +
+    geom_col() +
+    scale_y_continuous(labels = label_number(scale=1)) +
+    labs(
+      title='Média de óbitos por caso registrado',
+      y='Média de óbitos por caso',
+      x=NULL
+    ) +
+    theme(legend.position = "none") +
+    theme(plot.title = element_text(hjust=0.5))
+)
+
+ggplotly(
+  totals %>% ggplot(aes(x=municipio, y=media_casos_por_habitante, fill=municipio)) +
+    geom_col() +
+    scale_y_continuous(labels = label_number(scale=1)) +
+    labs(
+      title='Média de casos por habitante',
+      y='Média de casos por habitante',
+      x=NULL
+    ) +
+    theme(legend.position = "none") +
+    theme(plot.title = element_text(hjust=0.5))
+)
+
+ggplotly(
+  totals %>% ggplot(aes(x=municipio, y=media_obitos_por_habitante, fill=municipio)) +
+    geom_col() +
+    scale_y_continuous(labels = label_number(scale=1)) +
+    labs(
+      title='Média de óbitos por habitante',
+      y='Média de óbitos por habitante',
+      x=NULL
+    ) +
+    theme(legend.position = "none") +
+    theme(plot.title = element_text(hjust=0.5))
+)
