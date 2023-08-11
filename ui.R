@@ -1,15 +1,19 @@
 # source('utils.R')
+library(fresh)
 
 sidebar_size = '300px'
 
 header = dashboardHeader(
-  title='Dashboard Covid SP', 
-  titleWidth = sidebar_size,
-  
-  htmlOutput('main_css')
+  title='Dashboard Covid SP',
+  titleWidth = sidebar_size
 )
 
 sidebar = dashboardSidebar(
+  tags$link(
+    rel = 'stylesheet',
+    type = 'text/css',
+    href = 'main.css'
+  ),
   width = sidebar_size,
   
   fluidRow(
@@ -63,13 +67,18 @@ sidebar = dashboardSidebar(
 )
 
 body = dashboardBody(
+  tags$link(
+    rel = 'stylesheet',
+    type = 'text/css',
+    href = 'main.css'
+  ),
   fluidRow(
     column(
       width = 12,
       box(
+        class = 'chart-selection',
         width = '100%',
-        style = 'margin-top: -4px #ccc; background: #3c8dbc; border-radius: 5px;',
-        actionButton('action', label='Action')
+        actionButton('action', label='Evolução dos casos por município', class='btn btn-primary'),
       )
     ),
   ),
@@ -77,8 +86,8 @@ body = dashboardBody(
     column(
       width = 12,
       box(
+        class = 'box-evolucao-casos',
         width = '100%',
-        style = 'margin-top: -3px; box-shadow: 0 0 10px #ccc; background: #fff; border-radius: 10px;',
         plotlyOutput('chart_evolucao_casos')
       )
     ),
@@ -86,7 +95,6 @@ body = dashboardBody(
       width = 12,
       box(
         width = '100%',
-        style = 'margin-top: -3px; box-shadow: 0 0 10px #ccc; background: #fff; border-radius: 10px;',
         plotlyOutput('chart_evolucao_obitos')
       )
     ),
@@ -94,7 +102,6 @@ body = dashboardBody(
       width = 12,
       box(
         width = '100%',
-        style = 'margin-top: -3px; box-shadow: 0 0 10px #ccc; background: #fff; border-radius: 10px;',
         plotlyOutput('chart_obitos_por_habitante')
       )
     ),
@@ -102,14 +109,14 @@ body = dashboardBody(
       width = 12,
       box(
         width = '100%',
-        style = 'margin-top: -3px; box-shadow: 0 0 10px #ccc; background: #fff; border-radius: 10px;',
         plotlyOutput('chart_evol_obitos_por_caso')
       )
     )
   ),
   
-  htmlOutput('jquery_cdn'),
-  htmlOutput('main_js')
+  tags$script(
+    src = 'main.js'
+  )
 )
 
 dashboardPage(

@@ -1,0 +1,44 @@
+.box, .box .box-body {
+    margin-top: -3px; 
+    box-shadow: 0 0 10px #ccc; 
+    background-color: #fff; 
+    border-radius: 10px;
+    border: none;
+    border-top: none;
+}
+
+#action {
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+}
+
+#action.inactive {
+    background-color: #ccc;
+    color: #aaa;
+}
+
+.box.chart-selection, .box .box-body.chart-selection {
+    margin-top: -4px #ccc; 
+    background: #ecf0f5; 
+    border-radius: 5px;
+}
+
+.chart-selection-parent, .box-body.chart-selection {
+    box-shadow: none;
+}
+
+#sidebarCollapsed {
+    background-color: #202123;
+}
+
+.selectize-control.multi .selectize-input > div {
+    background-color: #2d2f31;
+    color: #ECECF1;
+}
+
+.selectize-input, input.form-control {
+    background-color: #424449;
+    color: #ECECF1;
+    border: none;
+}
