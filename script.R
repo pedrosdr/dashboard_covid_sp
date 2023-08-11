@@ -45,17 +45,32 @@ totals = s %>%
     media_obitos_por_habitante = mean(obitos_por_habitante)
   )
 
+# INCORPORADO
 ggplotly(
-  s %>% ggplot(aes(x=data, y=casos, group=municipio, color=municipio)) +
+  s %>% ggplot(aes(
+                  x=data, 
+                  y=casos, 
+                  group=municipio, 
+                  color=municipio,
+                  text = sprintf(
+                    'Número de casos: %d<br>Data: %s<br>Município: %s',
+                    casos,
+                    format(data, '%d/%m/%Y'),
+                    municipio)
+              )
+    ) +
     geom_line(size=1) +
     labs(
       x=NULL, 
       y='Número de casos', 
       title='Evolução dos casos por município',
-      color = 'Município') +
-    theme(plot.title = element_text(hjust = 0.5))
+      color = 'Município',
+    ) +
+    theme(plot.title = element_text(hjust = 0.5)),
+  tooltip = 'text'
 )
 
+# INCORPORADO
 ggplotly(
   s %>% ggplot(aes(
                   x=data, 
@@ -63,10 +78,10 @@ ggplotly(
                   group=municipio, 
                   color=municipio,
                   text = sprintf(
-                    'Óbitos por caso: %.4f<br>Data: %s', 
-                    obitos_por_caso, 
-                    format(data, '%d/%m/%Y')
-                  )
+                    'Número de casos: %d<br>Data: %s<br>Município: %s',
+                    casos,
+                    format(data, '%d/%m/%Y'),
+                    municipio)
                 )
               ) +
     geom_line(size=1) +
@@ -81,7 +96,44 @@ ggplotly(
 )
 
 ggplotly(
-  s %>% ggplot(aes(x=data, y=obitos, color=municipio)) +
+  s %>% ggplot(aes(
+                  x=data, 
+                  y=obitos_por_caso, 
+                  group=municipio, 
+                  color=municipio,
+                  text = sprintf(
+                    'Número de casos: %d<br>Data: %s<br>Município: %s',
+                    casos,
+                    format(data, '%d/%m/%Y'),
+                    municipio)
+                )
+              ) +
+    geom_line(size=1) +
+    labs(
+      x=NULL, 
+      y='Número de óbitos por caso', 
+      title='Evolução do número de óbitos por caso registrado',
+      color = 'Município') +
+    theme(plot.title = element_text(hjust = 0.5)) +
+    scale_x_date(labels = date_format('%d/%m/%Y')),
+  tooltip = 'text'
+)
+
+# incorporando
+ggplotly(
+  s %>% ggplot(aes(
+                  x=data, 
+                  y=obitos,
+                  group = municipio,
+                  color=municipio,
+                  text = sprintf(
+                    'Óbitos: %d<br>Data: %s<br>Município: %s',
+                    obitos,
+                    format(data, '%d/%m/%Y'),
+                    municipio
+                  )
+                )
+    ) +
     geom_line(size=1) +
     labs(
       x=NULL,
@@ -89,7 +141,8 @@ ggplotly(
       color='Município',
       title='Evolução dos óbitos por muncípio'
     ) +
-    theme(plot.title = element_text(hjust=0.5))
+    theme(plot.title = element_text(hjust=0.5)),
+  tooltip = 'text'
 )
 
 ggplotly(

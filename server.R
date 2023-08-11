@@ -1,6 +1,7 @@
 # source('utils.R')
 
 function(input, output, session) {
+  
   # EVENT: s
   s = eventReactive(input$button_submit, {
       data %>% 
@@ -9,7 +10,62 @@ function(input, output, session) {
         data > input$inicial_date &
         data < input$final_date
       )
-  }) # END EVENT: s
+  }, ignoreNULL = FALSE) # END EVENT: s
+  
+  # CHART(LINE): evolução dos casos por município
+  output$chart_evolucao_casos = renderPlotly({
+    ggplotly(
+      s() %>% ggplot(aes(
+        x=data, 
+        y=casos, 
+        group=municipio, 
+        color=municipio,
+        text = sprintf(
+          'Número de casos: %d<br>Data: %s<br>Município: %s',
+          casos,
+          format(data, '%d/%m/%Y'),
+          municipio)
+      )
+      ) +
+        geom_line(size=1) +
+        labs(
+          x=NULL, 
+          y='Número de casos', 
+          title='Evolução dos casos por município',
+          color = 'Município',
+        ) +
+        theme(plot.title = element_text(hjust = 0.5)),
+      tooltip = 'text'
+    )
+  }) # END CHART(LINE): evolução dos casos por município
+  
+  # CHART(LINE): evolução dos óbitos por município
+  output$chart_evolucao_obitos = renderPlotly({
+    ggplotly(
+      s() %>% ggplot(aes(
+        x=data, 
+        y=obitos,
+        group = municipio,
+        color=municipio,
+        text = sprintf(
+          'Óbitos: %d<br>Data: %s<br>Município: %s',
+          obitos,
+          format(data, '%d/%m/%Y'),
+          municipio
+        )
+      )
+      ) +
+        geom_line(size=1) +
+        labs(
+          x=NULL,
+          y='Número de óbitos',
+          color='Município',
+          title='Evolução dos óbitos por muncípio'
+        ) +
+        theme(plot.title = element_text(hjust=0.5)),
+      tooltip = 'text'
+    )
+  }) # END CHART(LINE): evolução dos óbitos por município
   
   # CHART(BAR): óbitos por habitante
   output$chart_obitos_por_habitante = renderPlotly({

@@ -11,8 +11,6 @@ theme_set(
   theme(text = element_text(family = 'Helvetica'))
 )
 
-setwd('C:/Users/Lenovo/Desktop/r')
-
 data = read.csv('data.csv', sep=';')
 data = data %>% rename(municipio='nome_munic')
 data = data %>% rename(data='datahora')

@@ -2,7 +2,7 @@
 
 sidebar_size = '300px'
 
-header = dashboardHeader(title='Covid SP', titleWidth = sidebar_size)
+header = dashboardHeader(title='Dashboard Covid SP', titleWidth = sidebar_size)
 
 sidebar = dashboardSidebar(
   width = sidebar_size,
@@ -14,7 +14,9 @@ sidebar = dashboardSidebar(
         'selectize_municipio', 
         label = 'Município:', 
         choices = unique(data$municipio),
-        options = list(maxItems = 10)
+        options = list(maxItems = 10),
+        selected = c('Ribeirão Preto', 'Barretos', 'Campinas'),
+        multiple = TRUE
       )
     )
   ),
@@ -45,7 +47,11 @@ sidebar = dashboardSidebar(
   fluidRow(
     column(
       width=12,
-      actionButton('button_submit', label = 'Consultar', class='btn btn-primary btn-large')
+      actionButton(
+        'button_submit', 
+        label = 'Consultar', 
+        class='btn-primary btn-large', 
+        style='color: #fff; width: 90%;')
     )
   )
   
@@ -54,16 +60,44 @@ sidebar = dashboardSidebar(
 body = dashboardBody(
   fluidRow(
     column(
-      width = 6,
+      width = 12,
       box(
         width = '100%',
+        style = 'margin-top: -4px #ccc; background: #3c8dbc; border-radius: 5px;',
+        actionButton('action', label='Action')
+      )
+    ),
+  ),
+  fluidRow(
+    column(
+      width = 12,
+      box(
+        width = '100%',
+        style = 'margin-top: -3px; box-shadow: 0 0 10px #ccc; background: #fff; border-radius: 10px;',
+        plotlyOutput('chart_evolucao_casos')
+      )
+    ),
+    column(
+      width = 12,
+      box(
+        width = '100%',
+        style = 'margin-top: -3px; box-shadow: 0 0 10px #ccc; background: #fff; border-radius: 10px;',
+        plotlyOutput('chart_evolucao_obitos')
+      )
+    ),
+    column(
+      width = 12,
+      box(
+        width = '100%',
+        style = 'margin-top: -3px; box-shadow: 0 0 10px #ccc; background: #fff; border-radius: 10px;',
         plotlyOutput('chart_obitos_por_habitante')
       )
     ),
     column(
-      width = 6,
+      width = 12,
       box(
         width = '100%',
+        style = 'margin-top: -3px; box-shadow: 0 0 10px #ccc; background: #fff; border-radius: 10px;',
         plotlyOutput('chart_evol_obitos_por_caso')
       )
     )
