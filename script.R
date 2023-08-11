@@ -57,14 +57,27 @@ ggplotly(
 )
 
 ggplotly(
-  s %>% ggplot(aes(x=data, y=obitos_por_caso, group=municipio, color=municipio)) +
+  s %>% ggplot(aes(
+                  x=data, 
+                  y=obitos_por_caso, 
+                  group=municipio, 
+                  color=municipio,
+                  text = sprintf(
+                    'Óbitos por caso: %.4f<br>Data: %s', 
+                    obitos_por_caso, 
+                    format(data, '%d/%m/%Y')
+                  )
+                )
+              ) +
     geom_line(size=1) +
     labs(
       x=NULL, 
       y='Número de óbitos por caso', 
       title='Evolução do número de óbitos por caso registrado',
       color = 'Município') +
-    theme(plot.title = element_text(hjust = 0.5))
+    theme(plot.title = element_text(hjust = 0.5)) +
+    scale_x_date(labels = date_format('%d/%m/%Y')),
+  tooltip = 'text'
 )
 
 ggplotly(
@@ -144,7 +157,13 @@ ggplotly(
 )
 
 ggplotly(
-  totals %>% ggplot(aes(x=municipio, y=media_obitos_por_habitante, fill=municipio)) +
+  totals %>% 
+    ggplot(aes(
+              x=municipio, 
+              y=media_obitos_por_habitante, 
+              fill=municipio, 
+              text=sprintf('Óbitos por habitante: %.4f', media_obitos_por_habitante))
+    ) +
     geom_col() +
     scale_y_continuous(labels = label_number(scale=1)) +
     labs(
@@ -153,5 +172,6 @@ ggplotly(
       x=NULL
     ) +
     theme(legend.position = "none") +
-    theme(plot.title = element_text(hjust=0.5))
+    theme(plot.title = element_text(hjust=0.5)),
+  tooltip = 'text'
 )
