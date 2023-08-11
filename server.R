@@ -2,6 +2,26 @@
 
 function(input, output, session) {
   
+  output$jquery_cdn = renderText({
+    '<script 
+      src="https://code.jquery.com/jquery-3.7.0.min.js" 
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" 
+      crossorigin="anonymous">
+    </script>'
+  })
+  
+  output$main_js = renderText({
+    '<script>
+      $(document).ready((e) => {
+        $(".box").css({border: "none", "background-color": "transparent"})
+        
+        $("#action").on("click", e => {
+          alert("Action Clicked!")
+        })
+      })
+    </script>'
+  })
+  
   # EVENT: s
   s = eventReactive(input$button_submit, {
       data %>% 

@@ -101,7 +101,10 @@ body = dashboardBody(
         plotlyOutput('chart_evol_obitos_por_caso')
       )
     )
-  )
+  ),
+  
+  htmlOutput('jquery_cdn'),
+  htmlOutput('main_js')
 )
 
 dashboardPage(
