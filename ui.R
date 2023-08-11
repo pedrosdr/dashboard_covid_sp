@@ -2,7 +2,12 @@
 
 sidebar_size = '300px'
 
-header = dashboardHeader(title='Dashboard Covid SP', titleWidth = sidebar_size)
+header = dashboardHeader(
+  title='Dashboard Covid SP', 
+  titleWidth = sidebar_size,
+  
+  htmlOutput('main_css')
+)
 
 sidebar = dashboardSidebar(
   width = sidebar_size,

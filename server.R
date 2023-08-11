@@ -2,6 +2,15 @@
 
 function(input, output, session) {
   
+  output$main_css = renderText({
+    '<style>
+      .box {
+        background-color: transparent;
+        border: none;
+      }
+    </style>'
+  })
+  
   output$jquery_cdn = renderText({
     '<script 
       src="https://code.jquery.com/jquery-3.7.0.min.js" 
@@ -13,8 +22,6 @@ function(input, output, session) {
   output$main_js = renderText({
     '<script>
       $(document).ready((e) => {
-        $(".box").css({border: "none", "background-color": "transparent"})
-        
         $("#action").on("click", e => {
           alert("Action Clicked!")
         })
