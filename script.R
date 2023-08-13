@@ -42,7 +42,9 @@ totals = s %>%
     total_obitos = max(obitos),
     media_obitos_por_caso = mean(obitos_por_caso),
     media_casos_por_habitante = mean(casos_por_habitante),
-    media_obitos_por_habitante = mean(obitos_por_habitante)
+    media_obitos_por_habitante = mean(obitos_por_habitante),
+    total_obitos_por_habitante = max(obitos_por_habitante),
+    total_casos_por_habitante = max(casos_por_habitante)
   )
 
 # INCORPORADO
@@ -227,4 +229,16 @@ ggplotly(
     theme(legend.position = "none") +
     theme(plot.title = element_text(hjust=0.5)),
   tooltip = 'text'
+)
+
+ggplotly(
+  totals %>% 
+    ggplot(
+      aes(
+        y = total_obitos_por_habitante,
+        x = total_casos_por_habitante,
+        group = municipio
+      )
+    ) +
+    geom_point(color = '#3c8dbc', size = 3)
 )

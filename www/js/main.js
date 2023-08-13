@@ -1,12 +1,16 @@
 let on = true
 
 $(document).ready(e => {
-    $.get('title.html', html => {
+    $.get('../title.html', html => {
         $('section.content').before(html)
     })
 
-    $.get('filters.html', html => {
+    $.get('../filters.html', html => {
         $('#sidebarCollapsed').prepend(html)
+    })
+
+    $.get('../chart_title.html', html => {
+        $('.box-body.chart-box').before(html)
     })
 
     $('.box .box-body.chart-selection').parent().addClass('chart-selection-parent')
@@ -22,12 +26,12 @@ $(document).ready(e => {
 
     $('#action').on('click', e => {
         if(on) {
-            $('.box-evolucao-casos').fadeOut().width(0)
+            $('.box-evolucao-casos').parent().fadeOut()
             $('#action').addClass('inactive')
             on = false
         }
         else {
-            $('.box-evolucao-casos').fadeIn()
+            $('.box-evolucao-casos').parent().fadeIn()
             $('#action').removeClass('inactive')
             on = true
         }

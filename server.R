@@ -2,6 +2,8 @@
 
 function(input, output, session) {
   
+  palette = 'Dark2'
+  
   # EVENT: s
   s = eventReactive(input$button_submit, {
       data %>% 
@@ -34,6 +36,7 @@ function(input, output, session) {
           title='Evolução dos casos por município',
           color = 'Município',
         ) +
+        scale_color_brewer(palette = palette) +
         theme(plot.title = element_text(hjust = 0.5)),
       tooltip = 'text'
     )
@@ -84,8 +87,7 @@ function(input, output, session) {
       totals %>% 
         ggplot(aes(
                 x=municipio, 
-                y=media_obitos_por_habitante, 
-                fill=municipio, 
+                y=media_obitos_por_habitante,
                 text=sprintf(
                   'Óbitos por habitante: %.4f<br>Município: %s', 
                   media_obitos_por_habitante, 
@@ -93,7 +95,7 @@ function(input, output, session) {
                 )
               )
         ) +
-        geom_col() +
+        geom_col(fill = '#3c8dbc') +
         scale_y_continuous(labels = label_number(scale=1)) +
         labs(
           title='Média de óbitos por habitante',

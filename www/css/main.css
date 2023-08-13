@@ -4,13 +4,20 @@ body{
     background-color: transparent;
 }
 
-.box, .box .box-body {
+.box {
+    padding: 0;
     margin-top: -3px; 
-    box-shadow: 0 0 18px #dedee9; 
+    box-shadow: 0 0 18px #b8b8b8; 
     background-color: #fff; 
     border-radius: 10px;
+    margin: 10px;
     border: none;
     border-top: none;
+}
+
+.box .box-body {
+    padding: 10px;
+    border-radius: 0 0 10px 10px;
 }
 
 #action {
@@ -34,6 +41,7 @@ body{
 .chart-selection-parent, .box-body.chart-selection {
     box-shadow: none;
     background-color: transparent;
+    margin: 15px;
 }
 
 #sidebarCollapsed {
@@ -183,4 +191,18 @@ header.main-header {
         font-size: 3.5rem;
     }
     
+}
+
+
+.chart-title {
+    background-color: #3c8dbc;
+    border-radius: 10px 10px 0 0;
+    padding: 10px;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.chart-title h3 {
+    margin: 0;
+    color: #fff;
 }

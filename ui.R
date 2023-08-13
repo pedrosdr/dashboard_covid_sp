@@ -73,7 +73,7 @@ body = dashboardBody(
   ),
   fluidRow(
     column(
-      width = 12,
+      width = 6,
       box(
         class = 'chart-selection',
         width = '100%',
@@ -83,31 +83,33 @@ body = dashboardBody(
   ),
   fluidRow(
     column(
-      width = 12,
+      width = 6,
       box(
-        class = 'box-evolucao-casos',
+        class = 'chart-box box-evolucao-casos',
         width = '100%',
         plotlyOutput('chart_evolucao_casos')
       )
     ),
     column(
-      width = 12,
+      width = 6,
       box(
+        class = 'chart-box box-evolucao_obitos',
         width = '100%',
         plotlyOutput('chart_evolucao_obitos')
       )
     ),
     column(
-      width = 12,
+      width = 6,
       box(
-        class = 'box-obitos-por-habitante',
+        class = 'chart-box box-obitos-por-habitante',
         width = '100%',
         plotlyOutput('chart_obitos_por_habitante')
       )
     ),
     column(
-      width = 12,
+      width = 6,
       box(
+        class = 'chart-box box-evol_obitos_por_caso',
         width = '100%',
         plotlyOutput('chart_evol_obitos_por_caso')
       )
