@@ -1,18 +1,17 @@
 # source('utils.R')
-library(fresh)
 
 sidebar_size = '300px'
 
 header = dashboardHeader(
   title='Dashboard Covid SP',
-  titleWidth = sidebar_size
+  titleWidth = '250px'
 )
 
 sidebar = dashboardSidebar(
   tags$link(
     rel = 'stylesheet',
     type = 'text/css',
-    href = 'main.css'
+    href = 'css/main.css'
   ),
   width = sidebar_size,
   
@@ -21,10 +20,10 @@ sidebar = dashboardSidebar(
       width=12,
       selectizeInput(
         'selectize_municipio', 
-        label = 'Município:', 
+        label = 'Municípios:', 
         choices = unique(data$municipio),
         options = list(maxItems = 10),
-        selected = c('Ribeirão Preto', 'Barretos', 'Campinas'),
+        selected = c('Ribeirão Preto', 'São Carlos', 'Lorena'),
         multiple = TRUE
       )
     )
@@ -70,11 +69,11 @@ body = dashboardBody(
   tags$link(
     rel = 'stylesheet',
     type = 'text/css',
-    href = 'main.css'
+    href = 'css/main.css'
   ),
   fluidRow(
     column(
-      width = 6,
+      width = 12,
       box(
         class = 'chart-selection',
         width = '100%',
@@ -84,7 +83,7 @@ body = dashboardBody(
   ),
   fluidRow(
     column(
-      width = 6,
+      width = 12,
       box(
         class = 'box-evolucao-casos',
         width = '100%',
@@ -92,7 +91,7 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 6,
+      width = 12,
       box(
         width = '100%',
         plotlyOutput('chart_evolucao_obitos')
@@ -116,7 +115,7 @@ body = dashboardBody(
   ),
   
   tags$script(
-    src = 'main.js'
+    src = 'js/main.js'
   )
 )
 

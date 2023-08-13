@@ -1,0 +1,186 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+.box, .box .box-body {
+    margin-top: -3px; 
+    box-shadow: 0 0 18px #dedee9; 
+    background-color: #fff; 
+    border-radius: 10px;
+    border: none;
+    border-top: none;
+}
+
+#action {
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    background-color: #3c8dbc;
+}
+
+#action.inactive {
+    background-color: #ccc;
+    color: #aaa;
+}
+
+.box.chart-selection, .box .box-body.chart-selection {
+    margin-top: -4px #ccc; 
+    background-color: transparent;
+    border-radius: 5px;
+}
+
+.chart-selection-parent, .box-body.chart-selection {
+    box-shadow: none;
+    background-color: transparent;
+}
+
+#sidebarCollapsed {
+    padding-top: 0;
+    background-color: #202123;
+}
+
+.selectize-control.multi .selectize-input > div {
+    background-color: #424449;
+    padding: 0.3rem 1rem;
+    border-radius: 15px;
+    color: #ECECF1;
+    border: 1px solid hsla(0,0%,100%,.2);
+}
+
+.selectize-control.multi .selectize-input > input {
+    color: #ECECF1;
+}
+
+
+.selectize-input, input.form-control {
+    background-color: #424449;
+    color: #ECECF1;
+    border-radius: 5px;
+    border: none;
+}
+
+.skin-blue .main-header .navbar {
+    padding: 0;
+    margin: 0;
+    width: 300px;
+    background-color: transparent;
+}
+
+.skin-blue .main-header .logo {
+    display: none;
+}
+
+header.main-header {
+    position: absolute;
+    top: 0;
+    width: 42.5px;
+    background-color: transparent;
+}
+
+.content-wrapper, .right-side {
+    background-color: #f1f1f5;
+}
+
+@media (min-width: 768px)
+{
+    .sidebar-collapse .content-wrapper, 
+    .sidebar-collapse .main-footer, 
+    .sidebar-collapse .right-side {
+        margin-left: 42.5px;
+    }
+}
+
+.skin-blue .main-header .navbar .sidebar-toggle {
+    background-color: transparent;
+}
+
+.skin-blue .main-header .navbar .sidebar-toggle:hover {
+    background-color: transparent;
+}
+
+@media(hover: hover)
+{
+    .skin-blue .main-header .navbar .sidebar-toggle:hover {
+        background-color: #424242;
+    }
+}
+
+#filters-title {
+    height: 50px;
+    padding-left: 60px;
+    color: #fff;
+}
+
+#filters-title span {
+    line-height: 50px;
+    font-size: large;
+}
+
+
+#section-title {
+    margin: 0;
+    margin-top: -25px;
+    padding: 0;
+    background: 
+        url('../img/covid_background.png') center center no-repeat, 
+        linear-gradient(45deg, #1471a7, #046399) center center no-repeat;
+    background-size: 120%;
+    background-attachment: fixed;
+    height: 200px;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 2rem;
+}
+
+#section-title .dashboard-title {
+    width: 100%;
+    color: #fff;
+}
+
+#section-title .dashboard-source {
+    width: 100%;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#section-title .dashboard-source span {
+    font-size: 2rem;
+    margin-right: 2rem;
+}
+
+#section-title .dashboard-source img {
+    width: 140px;
+}
+
+#section-title .dashboard-source a {
+    padding: 0.7rem;
+    border-radius: 5px;
+    transition: all 0.1s ease-in-out;
+}
+
+@media(hover: hover)
+{
+    #section-title .dashboard-source a:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+}
+
+#section-title h1 {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    letter-spacing: -0.3rem;
+    font-size: 5rem;
+}
+
+@media(max-width: 992px)
+{
+    #section-title h1 {
+        font-size: 3.5rem;
+    }
+    
+}
