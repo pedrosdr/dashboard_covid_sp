@@ -132,9 +132,11 @@ header.main-header {
     margin-top: -25px;
     padding: 0;
     background: 
-        url('../img/covid_background.png') center center no-repeat, 
+        url('../img/bg.png') center center no-repeat,
+        url('../img/bg.png') left bottom no-repeat,
+        url('../img/bg.png') right top no-repeat,
         linear-gradient(45deg, #1471a7, #046399) center center no-repeat;
-    background-size: 120%;
+    background-size: 300%, 250%, 200%, 100%;
     background-attachment: fixed;
     height: 200px;
     text-align: center;

@@ -1,0 +1,4 @@
+Evolução dos casos por município
+Evolução dos óbitos por município
+Média de óbitos por habitante
+Evolução do número de óbitos por caso registrado

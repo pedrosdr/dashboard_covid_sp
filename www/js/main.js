@@ -1,29 +1,52 @@
 let on = true
 
 $(document).ready(e => {
+    // adding page title
     $.get('../title.html', html => {
-        $('section.content').before(html)
+        $('section.content').before($(html))
     })
 
+    // adding filters text
     $.get('../filters.html', html => {
-        $('#sidebarCollapsed').prepend(html)
+        $('#sidebarCollapsed').prepend($(html))
     })
 
-    $.get('../chart_title.html', html => {
-        $('.box-body.chart-box').before(html)
+    // adding chart titles
+    let div_chart_title = $('<div>').addClass('chart-title').html($('<h3>'))
+    $('.box-body.chart-box').before(div_chart_title)
+
+    let boxCharts = $('.box-body').filter((i, el)=> {
+        if($(el).attr('class').includes('box-chart-'))
+            return true
+        return false
     })
 
+    $.get('../chart-titles.txt', titles => {
+        titles = titles.split('\n')
+
+        boxCharts.each((i, el) => {
+            let title = $(el).parent().find('.chart-title')
+            title.html('<h3>' + titles[i] + '</h3>')
+        })
+    })
+
+
+    // adding class chart-selection-parent to chart-selection boxes parents
     $('.box .box-body.chart-selection').parent().addClass('chart-selection-parent')
 
     $(document).on('mousemove', e => {
-        x = e.pageX / $('#section-title').width() * $(document).width() * 0.001
-        y = e.pageY / $('#section-title').height() * $(document).height() * 0.001
-        $('#section-title').css('background-position-x', x + '%')
-        $('#section-title').css('background-position-y', y + '%')
-        console.log('x: ', x, ' y: ', y)
-    })
-    
+        let x1 = e.pageX / $('#section-title').width() * $(document).width() * 0.0005
+        let y1 = e.pageY / $('#section-title').height() * $(document).height() * 0.0005
+        let x2 = -e.pageX / $('#section-title').width() * $(document).width() * 0.0002
+        let y2 = -e.pageY / $('#section-title').height() * $(document).height() * 0.0002
+        let x3 = e.pageX / $('#section-title').width() * $(document).width() * 0.0001
+        let y3 = -e.pageY / $('#section-title').height() * $(document).height() * 0.0001
 
+        backgrounPosition = x1 + '% ' + y1 + '%, ' + x2 + '% ' + y2 + '%, ' + x3 + '% ' + y3 + '%'
+        $('#section-title').css('background-position', backgrounPosition)
+    })
+
+    // adding functionality to the button #action (provisory)
     $('#action').on('click', e => {
         if(on) {
             $('.box-evolucao-casos').parent().fadeOut()
