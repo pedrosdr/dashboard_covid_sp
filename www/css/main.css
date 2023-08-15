@@ -49,6 +49,12 @@ body{
     background-color: #202123;
 }
 
+.sidebar-toggle, #sidebarCollapsed {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
 .selectize-control.multi .selectize-input > div {
     background-color: #424449;
     padding: 0.3rem 1rem;
@@ -135,8 +141,8 @@ header.main-header {
         url('../img/bg.png') center center no-repeat,
         url('../img/bg.png') left bottom no-repeat,
         url('../img/bg.png') right top no-repeat,
-        linear-gradient(45deg, #1471a7, #046399) center center no-repeat;
-    background-size: 300%, 250%, 200%, 100%;
+        linear-gradient(45deg, #9eb9c9, #297099) center center no-repeat;
+    background-size: 300%, 210%, 150%, 100%;
     background-attachment: fixed;
     height: 200px;
     text-align: center;
@@ -206,5 +212,41 @@ header.main-header {
 
 .chart-title h3 {
     margin: 0;
+    color: #f3f3f3;
+}
+
+#footer {
+    margin: 0;
+    padding: 30px;
+    height: 100%;
+    background: 
+        url('../img/bg.png') center center no-repeat,
+        url('../img/bg.png') left bottom no-repeat,
+        url('../img/bg.png') right top no-repeat,
+        linear-gradient(45deg, #6a7f8b, #1e5372) center center no-repeat;
+    background-size: 300%, 210%, 150%, 100%;
+    background-attachment: fixed;
+}
+
+#footer a{
+    text-decoration: none;
+    color: #cecece;
+}
+
+footer h4 {
     color: #fff;
+    text-align: center;
+}
+
+#footer ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}   
+
+#footer .col-md-6 {
+    display: flex;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
 }

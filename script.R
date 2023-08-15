@@ -121,7 +121,7 @@ ggplotly(
   tooltip = 'text'
 )
 
-# incorporando
+# INCORPORADO
 ggplotly(
   s %>% ggplot(aes(
                   x=data, 
@@ -147,20 +147,15 @@ ggplotly(
   tooltip = 'text'
 )
 
+# INCORPORADO
 ggplotly(
-  s %>% ggplot(aes(x=municipio, y=casos , fill=municipio)) +
-    geom_boxplot() +
-    scale_y_continuous(labels = label_number(scale = 1)) +
-    labs(
-      x = NULL,
-      y='Número de casos', 
-      title='Evolução dos casos por município por data') +
-    theme(plot.title = element_text(hjust = 0.5)) +
-    theme(legend.position = 'none')
-)
-
-ggplotly(
-  totals %>% ggplot(aes(x=municipio, y=total_casos, fill=municipio)) +
+  totals %>% ggplot(aes(
+                      x=municipio, 
+                      y=total_casos, 
+                      fill=municipio,
+                      text = sprintf('Casos: %d<br>Município: %s',
+                                     total_casos,
+                                     municipio))) +
         geom_col() +
         scale_y_continuous(labels = label_number(scale=1)) +
         labs(
@@ -169,11 +164,21 @@ ggplotly(
           x=NULL
         ) +
         theme(legend.position = "none") +
-        theme(plot.title = element_text(hjust=0.5))
+        theme(plot.title = element_text(hjust=0.5)),
+  tooltip = 'text'
 )
 
+# INCORPORADO
 ggplotly(
-  totals %>% ggplot(aes(x=municipio, y=total_obitos, fill=municipio)) +
+  totals %>% ggplot(aes(
+                        x=municipio, 
+                        y=total_obitos, 
+                        fill=municipio,
+                        text = sprintf(
+                          'Óbitos: %d<br>Município: %s',
+                          total_obitos,
+                          municipio
+                        ))) +
     geom_col() +
     scale_y_continuous(labels = label_number(scale=1)) +
     labs(
@@ -182,11 +187,21 @@ ggplotly(
       x=NULL
     ) +
     theme(legend.position = "none") +
-    theme(plot.title = element_text(hjust=0.5))
+    theme(plot.title = element_text(hjust=0.5)),
+  tooltip = 'text'
 )
 
+# INCORPORADO
 ggplotly(
-  totals %>% ggplot(aes(x=municipio, y=media_obitos_por_caso, fill=municipio)) +
+  totals %>% ggplot(aes(
+                        x=municipio, 
+                        y=media_obitos_por_caso, 
+                        fill=municipio,
+                        text = sprintf(
+                          'Óbitos/caso: %.4f<br>Município: %s',
+                          media_obitos_por_caso,
+                          municipio
+                        ))) +
     geom_col() +
     scale_y_continuous(labels = label_number(scale=1)) +
     labs(
@@ -195,11 +210,19 @@ ggplotly(
       x=NULL
     ) +
     theme(legend.position = "none") +
-    theme(plot.title = element_text(hjust=0.5))
+    theme(plot.title = element_text(hjust=0.5)),
+  tooltip = 'text'
 )
 
+# INCORPORADO
 ggplotly(
-  totals %>% ggplot(aes(x=municipio, y=media_casos_por_habitante, fill=municipio)) +
+  totals %>% ggplot(aes(
+                      x=municipio, 
+                      y=media_casos_por_habitante, 
+                      fill=municipio,
+                      text=sprintf('Casos/habitante: %.4f<br>Município: %s',
+                                   media_casos_por_habitante,
+                                   municipio))) +
     geom_col() +
     scale_y_continuous(labels = label_number(scale=1)) +
     labs(
@@ -208,7 +231,8 @@ ggplotly(
       x=NULL
     ) +
     theme(legend.position = "none") +
-    theme(plot.title = element_text(hjust=0.5))
+    theme(plot.title = element_text(hjust=0.5)),
+  tooltip = 'text'
 )
 
 ggplotly(

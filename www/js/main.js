@@ -11,12 +11,16 @@ $(document).ready(e => {
         $('#sidebarCollapsed').prepend($(html))
     })
 
+    $.get('../footer.html', html => {
+        $('section.content').after($(html))
+    })
+
     // adding chart titles
     let div_chart_title = $('<div>').addClass('chart-title').html($('<h3>'))
     $('.box-body.chart-box').before(div_chart_title)
 
     let boxCharts = $('.box-body').filter((i, el)=> {
-        if($(el).attr('class').includes('box-chart-'))
+        if($(el).attr('class').includes('chart-box'))
             return true
         return false
     })
@@ -39,11 +43,11 @@ $(document).ready(e => {
         let y1 = e.pageY / $('#section-title').height() * $(document).height() * 0.0005
         let x2 = -e.pageX / $('#section-title').width() * $(document).width() * 0.0002
         let y2 = -e.pageY / $('#section-title').height() * $(document).height() * 0.0002
-        let x3 = e.pageX / $('#section-title').width() * $(document).width() * 0.0001
-        let y3 = -e.pageY / $('#section-title').height() * $(document).height() * 0.0001
+        let x3 = -e.pageX / $('#section-title').width() * $(document).width() * 0.0001
+        let y3 = e.pageY / $('#section-title').height() * $(document).height() * 0.0001
 
         backgrounPosition = x1 + '% ' + y1 + '%, ' + x2 + '% ' + y2 + '%, ' + x3 + '% ' + y3 + '%'
-        $('#section-title').css('background-position', backgrounPosition)
+        $('#section-title, #footer').css('background-position', backgrounPosition)
     })
 
     // adding functionality to the button #action (provisory)

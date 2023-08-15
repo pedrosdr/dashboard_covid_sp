@@ -25,3 +25,4 @@ data$data = as.Date(data$data)
 data$casos_por_habitante = data$casos / data$populacao
 data$obitos_por_habitante = data$obitos / data$populacao
 data$obitos_por_caso = data$obitos / data$casos
+data$obitos_por_caso = replace(data$obitos_por_caso, is.nan(data$obitos_por_caso), 0)

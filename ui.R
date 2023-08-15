@@ -85,7 +85,7 @@ body = dashboardBody(
     column(
       width = 6,
       box(
-        class = 'chart-box box-chart-1',
+        class = 'chart-box',
         width = '100%',
         plotlyOutput('chart_evolucao_casos')
       )
@@ -93,7 +93,7 @@ body = dashboardBody(
     column(
       width = 6,
       box(
-        class = 'chart-box box-chart-2',
+        class = 'chart-box',
         width = '100%',
         plotlyOutput('chart_evolucao_obitos')
       )
@@ -101,7 +101,7 @@ body = dashboardBody(
     column(
       width = 6,
       box(
-        class = 'chart-box box-chart-3',
+        class = 'chart-box',
         width = '100%',
         plotlyOutput('chart_obitos_por_habitante')
       )
@@ -109,9 +109,41 @@ body = dashboardBody(
     column(
       width = 6,
       box(
-        class = 'chart-box box-chart-4',
+        class = 'chart-box',
         width = '100%',
         plotlyOutput('chart_evol_obitos_por_caso')
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        class = 'chart-box',
+        width = '100%',
+        plotlyOutput('chart_total_de_casos')
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        class = 'chart-box',
+        width = '100%',
+        plotlyOutput('chart_total_de_obitos')
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        class = 'chart-box',
+        width = '100%',
+        plotlyOutput('chart_casos_por_habitante')
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        class = 'chart-box',
+        width = '100%',
+        plotlyOutput('chart_obitos_por_caso')
       )
     )
   ),
