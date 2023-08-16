@@ -34,10 +34,7 @@ $(document).ready(e => {
         })
     })
 
-
-    // adding class chart-selection-parent to chart-selection boxes parents
-    $('.box .box-body.chart-selection').parent().addClass('chart-selection-parent')
-
+    // adding motion to section-title background
     $(document).on('mousemove', e => {
         let x1 = e.pageX / $('#section-title').width() * $(document).width() * 0.0005
         let y1 = e.pageY / $('#section-title').height() * $(document).height() * 0.0002
@@ -48,20 +45,6 @@ $(document).ready(e => {
 
         backgrounPosition = x1 + '% ' + y1 + '%, ' + x2 + '% ' + y2 + '%, ' + x3 + '% ' + y3 + '%'
         $('#section-title, #footer').css('background-position', backgrounPosition)
-    })
-
-    // adding functionality to the button #action (provisory)
-    $('#action').on('click', e => {
-        if(on) {
-            $('.box-evolucao-casos').parent().fadeOut()
-            $('#action').addClass('inactive')
-            on = false
-        }
-        else {
-            $('.box-evolucao-casos').parent().fadeIn()
-            $('#action').removeClass('inactive')
-            on = true
-        }
     })
 
     // adding chart-row titles
@@ -82,6 +65,56 @@ $(document).ready(e => {
     titleDiv = $('<div>').addClass('row-title').append(h2).append(hr)
 
     $('.row-casos-obitos').before(titleDiv)
+
+    // adding navbar
+    $.get('nav.html', html => {
+        $(html).prependTo('section.content')
+
+        // adding functionality to buttons
+        $('.navbar-link').on('click', e => {
+            e.preventDefault()
+        })
+
+        $('.navbar-link.link-casos').on('click', e => {
+            $('html, body').animate({
+                scrollTop: $('.row-casos').offset().top - 80
+            },
+            300)
+        })
+
+        $('.navbar-link.link-obitos').on('click', e => {
+            $('html, body').animate({
+                scrollTop: $('.row-obitos').offset().top - 80
+            },
+            300)
+        })
+
+        $('.navbar-link.link-casos-obitos').on('click', e => {
+            $('html, body').animate({
+                scrollTop: $('.row-casos-obitos').offset().top - 80
+            },
+            300)
+        })
+    })
+
+    // adding scroll-top button
+    $('section.content').append($('<div class="scroll-top"><i class="fa-solid fa-chevron-up"></i></div>'))
+
+    $('.scroll-top').on('click', e => {
+        $('html, body').animate({
+            scrollTop: 0
+        },
+        300)
+    })
+
+    $(document).on('scroll', e => {
+        if($(document).scrollTop() < 500) {
+            $('.scroll-top').css('display', 'none')
+        }
+        else {
+            $('.scroll-top').css('display', 'flex')
+        }
+    })
 
 })
 

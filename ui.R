@@ -72,16 +72,6 @@ body = dashboardBody(
     href = 'css/main.css'
   ),
   fluidRow(
-    column(
-      width = 6,
-      box(
-        class = 'chart-selection',
-        width = '100%',
-        actionButton('action', label='Evolução dos casos por município', class='btn btn-primary'),
-      )
-    ),
-  ),
-  fluidRow(
     class = 'chart-row row-casos',
     column(
       width = 8,
@@ -181,9 +171,6 @@ body = dashboardBody(
   
   tags$script(
     src = 'js/main.js'
-  ),
-  tags$script(
-    src = 'js/other.js'
   )
 )
 

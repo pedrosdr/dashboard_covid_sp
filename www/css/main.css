@@ -20,30 +20,6 @@ body{
     border-radius: 0 0 10px 10px;
 }
 
-#action {
-    color: #fff;
-    border: none;
-    border-radius: 20px;
-    background-color: #3c8dbc;
-}
-
-#action.inactive {
-    background-color: #ccc;
-    color: #aaa;
-}
-
-.box.chart-selection, .box .box-body.chart-selection {
-    margin-top: -4px #ccc; 
-    background-color: transparent;
-    border-radius: 5px;
-}
-
-.chart-selection-parent, .box-body.chart-selection {
-    box-shadow: none;
-    background-color: transparent;
-    margin: 15px;
-}
-
 #sidebarCollapsed {
     padding-top: 0;
     background-color: #202123;
@@ -263,4 +239,81 @@ footer h4 {
 
 .row-title {
     margin: 0rem 2rem 0.5rem 2rem;
+}
+
+/* navbar */
+
+#navbar {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-list {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.navbar-item {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+.navbar-link, .navbar-link:link, .navbar-link:visited {
+    border: 1px solid #367faa;
+    color: #367faa;
+    transition: all 0.1s ease-in-out;
+    font-size: medium;
+    display: block;
+    width: 130px;
+    line-height: 25px;
+    border-radius: 13px;
+    margin: 10px;
+}
+
+a.navbar-link:active {
+    background-color: #becbd3;
+    border: 1px solid #becbd3;
+}
+
+@media(hover: hover) {
+    .navbar-link:hover {
+        color: #fff;
+        background-color: #367faa;
+    }
+}
+
+
+/* Scroll top button */
+.scroll-top {
+    background-color: rgba(100, 100, 238, 0.4);
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    transition: all 0.1s ease-in-out;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+}
+
+.scroll-top i {
+    font-size: large;
+    color: #fff;
+}
+
+@media(hover: hover)
+{
+    .scroll-top:hover {
+        background-color: rgba(100, 100, 238, 1);
+    }
 }

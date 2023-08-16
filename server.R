@@ -2,8 +2,6 @@
 
 function(input, output, session) {
   
-  palette = 'Dark2'
-  
   # EVENT: s
   s = eventReactive(input$button_submit, {
       data %>% 
@@ -36,7 +34,6 @@ function(input, output, session) {
           title='Evolução dos casos por município',
           color = 'Município',
         ) +
-        scale_color_brewer(palette = palette) +
         theme(plot.title = element_text(hjust = 0.5)),
       tooltip = 'text'
     )
