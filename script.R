@@ -3,6 +3,8 @@ library(data.table)
 library(ggplot2)
 library(plotly)
 library(scales)
+library(shiny)
+library(shinydashboard)
 
 theme_set(
   theme_bw() +
@@ -25,12 +27,14 @@ data$data = as.Date(data$data)
 data$casos_por_habitante = data$casos / data$populacao
 data$obitos_por_habitante = data$obitos / data$populacao
 data$obitos_por_caso = data$obitos / data$casos
+data$obitos_por_caso = replace(data$obitos_por_caso, is.nan(data$obitos_por_caso), 0)
 
 
 s = data %>% filter(
-                toupper(municipio) %in% c('SÃO CARLOS', 'RIBEIRÃO PRETO', 'GUARULHOS') &
-                data > as.Date('2021-01-01') &
-                data < as.Date('2023-01-01')
+                toupper(municipio) %in% c('SÃO CARLOS', 'RIBEIRÃO PRETO', 'GUARULHOS') 
+                #&
+                #data > as.Date('2021-01-01') &
+                #data < as.Date('2023-01-01')
              )
 
 
@@ -235,6 +239,7 @@ ggplotly(
   tooltip = 'text'
 )
 
+# INCORPORADO
 ggplotly(
   totals %>% 
     ggplot(aes(
@@ -255,14 +260,78 @@ ggplotly(
   tooltip = 'text'
 )
 
+# INCORPORADO
 ggplotly(
   totals %>% 
     ggplot(
       aes(
         y = total_obitos_por_habitante,
         x = total_casos_por_habitante,
-        group = municipio
+        group = municipio,
+        text = sprintf(
+          'Óbitos/habitante: %.4f<br>Casos/habitante: %.4f<br>Município: %s',
+          total_obitos_por_habitante,
+          total_casos_por_habitante,
+          municipio
+        )
       )
     ) +
-    geom_point(color = '#3c8dbc', size = 3)
+    geom_point(color = '#3c8dbc', size = 3) +
+    labs(
+      x = 'Casos/habitante',
+      y = 'Óbitos/habitante',
+      title = 'Valores máximos de casos e óbitos por habitante'
+    ),
+  tooltip = 'text'
+)
+
+# INCORPORADO
+ggplotly(
+  s %>% ggplot(aes(
+    x=data, 
+    y=casos_por_habitante, 
+    group=municipio, 
+    color=municipio,
+    text = sprintf(
+      'Casos/habitante: %.4f<br>Data: %s<br>Município: %s',
+      casos_por_habitante,
+      format(data, '%d/%m/%Y'),
+      municipio)
+  )
+  ) +
+    geom_line(size=1) +
+    labs(
+      x=NULL, 
+      y='Casos/habitante', 
+      title='Evolução dos casos/habitante',
+      color = 'Município',
+    ) +
+    theme(plot.title = element_text(hjust = 0.5)),
+  tooltip = 'text'
+)
+
+
+# incorporando
+ggplotly(
+  s %>% ggplot(aes(
+    x=data, 
+    y=obitos_por_habitante, 
+    group=municipio, 
+    color=municipio,
+    text = sprintf(
+      'Óbitos/habitante: %.4f<br>Data: %s<br>Município: %s',
+      obitos_por_habitante,
+      format(data, '%d/%m/%Y'),
+      municipio)
+  )
+  ) +
+    geom_line(size=1) +
+    labs(
+      x=NULL, 
+      y='Óbitos/habitante', 
+      title='Evolução dos Óbitos/habitante',
+      color = 'Município',
+    ) +
+    theme(plot.title = element_text(hjust = 0.5)),
+  tooltip = 'text'
 )

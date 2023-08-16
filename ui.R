@@ -82,8 +82,9 @@ body = dashboardBody(
     ),
   ),
   fluidRow(
+    class = 'chart-row row-casos',
     column(
-      width = 6,
+      width = 8,
       box(
         class = 'chart-box',
         width = '100%',
@@ -91,31 +92,7 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 6,
-      box(
-        class = 'chart-box',
-        width = '100%',
-        plotlyOutput('chart_evolucao_obitos')
-      )
-    ),
-    column(
-      width = 6,
-      box(
-        class = 'chart-box',
-        width = '100%',
-        plotlyOutput('chart_obitos_por_habitante')
-      )
-    ),
-    column(
-      width = 6,
-      box(
-        class = 'chart-box',
-        width = '100%',
-        plotlyOutput('chart_evol_obitos_por_caso')
-      )
-    ),
-    column(
-      width = 6,
+      width = 4,
       box(
         class = 'chart-box',
         width = '100%',
@@ -123,7 +100,34 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 6,
+      width = 8,
+      box(
+        class = 'chart-box',
+        width = '100%',
+        plotlyOutput('chart_evol_casos_por_habitante')
+      )
+    ),
+    column(
+      width = 4,
+      box(
+        class = 'chart-box',
+        width = '100%',
+        plotlyOutput('chart_casos_por_habitante')
+      )
+    )
+  ),
+  fluidRow(
+    class = 'chart-row row-obitos',
+    column(
+      width = 8,
+      box(
+        class = 'chart-box',
+        width = '100%',
+        plotlyOutput('chart_evolucao_obitos')
+      )
+    ),
+    column(
+      width = 4,
       box(
         class = 'chart-box',
         width = '100%',
@@ -131,19 +135,46 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 6,
+      width = 8,
       box(
         class = 'chart-box',
         width = '100%',
-        plotlyOutput('chart_casos_por_habitante')
+        plotlyOutput('chart_evol_obitos_por_habitante')
       )
     ),
     column(
-      width = 6,
+      width = 4,
+      box(
+        class = 'chart-box',
+        width = '100%',
+        plotlyOutput('chart_obitos_por_habitante')
+      )
+    )
+  ),
+  fluidRow(
+    class = 'chart-row row-casos-obitos',
+    column(
+      width = 8,
+      box(
+        class = 'chart-box',
+        width = '100%',
+        plotlyOutput('chart_evol_obitos_por_caso')
+      )
+    ),
+    column(
+      width = 4,
       box(
         class = 'chart-box',
         width = '100%',
         plotlyOutput('chart_obitos_por_caso')
+      )
+    ),
+    column(
+      width = 12,
+      box(
+        class = 'chart-box',
+        width = '100%',
+        plotlyOutput('chart_casos_e_obitos')
       )
     )
   ),
