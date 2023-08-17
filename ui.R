@@ -74,7 +74,7 @@ body = dashboardBody(
   fluidRow(
     class = 'chart-row row-casos',
     column(
-      width = 8,
+      width = 7,
       box(
         class = 'chart-box',
         width = '100%',
@@ -82,7 +82,7 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 4,
+      width = 5,
       box(
         class = 'chart-box',
         width = '100%',
@@ -90,7 +90,7 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 8,
+      width = 7,
       box(
         class = 'chart-box',
         width = '100%',
@@ -98,7 +98,7 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 4,
+      width = 5,
       box(
         class = 'chart-box',
         width = '100%',
@@ -109,7 +109,7 @@ body = dashboardBody(
   fluidRow(
     class = 'chart-row row-obitos',
     column(
-      width = 8,
+      width = 7,
       box(
         class = 'chart-box',
         width = '100%',
@@ -117,7 +117,7 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 4,
+      width = 5,
       box(
         class = 'chart-box',
         width = '100%',
@@ -125,7 +125,7 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 8,
+      width = 7,
       box(
         class = 'chart-box',
         width = '100%',
@@ -133,7 +133,7 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 4,
+      width = 5,
       box(
         class = 'chart-box',
         width = '100%',
@@ -144,7 +144,7 @@ body = dashboardBody(
   fluidRow(
     class = 'chart-row row-casos-obitos',
     column(
-      width = 8,
+      width = 7,
       box(
         class = 'chart-box',
         width = '100%',
@@ -152,7 +152,7 @@ body = dashboardBody(
       )
     ),
     column(
-      width = 4,
+      width = 5,
       box(
         class = 'chart-box',
         width = '100%',

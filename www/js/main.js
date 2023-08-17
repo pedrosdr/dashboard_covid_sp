@@ -13,6 +13,10 @@ $(document).ready(e => {
 
     $.get('../footer.html', html => {
         $('section.content').after($(html))
+
+        $('.link-casos, .link-obitos, link-casos-obitos').on('click', e => {
+            e.preventDefault()
+        })
     })
 
     // adding chart titles
@@ -75,21 +79,21 @@ $(document).ready(e => {
             e.preventDefault()
         })
 
-        $('.navbar-link.link-casos').on('click', e => {
+        $('.link-casos').on('click', e => {
             $('html, body').animate({
                 scrollTop: $('.row-casos').offset().top - 80
             },
             300)
         })
 
-        $('.navbar-link.link-obitos').on('click', e => {
+        $('.link-obitos').on('click', e => {
             $('html, body').animate({
                 scrollTop: $('.row-obitos').offset().top - 80
             },
             300)
         })
 
-        $('.navbar-link.link-casos-obitos').on('click', e => {
+        $('.link-casos-obitos').on('click', e => {
             $('html, body').animate({
                 scrollTop: $('.row-casos-obitos').offset().top - 80
             },
