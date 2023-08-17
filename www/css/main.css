@@ -128,6 +128,12 @@ header.main-header {
     padding: 2rem;
 }
 
+@media(max-width: 496px) {
+    #section-title {
+        height: 300px;
+    }
+}
+
 #section-title .dashboard-title {
     width: 100%;
     color: #fff;
@@ -230,6 +236,7 @@ footer h4 {
 #footer .footer-col-content {
     width: 200px;
     margin: auto;
+    padding: 1rem 0 0 0;
 }
 
 #footer ul {
@@ -261,7 +268,7 @@ footer h4 {
 
 .navbar-list {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap ;
     justify-content: center;
     margin: 0;
     padding: 0;
@@ -296,6 +303,16 @@ a.navbar-link:active {
     .navbar-link:hover {
         color: #fff;
         background-color: #367faa;
+    }
+}
+
+@media(max-width: 496px) {
+    .navbar-item {
+        width: 100%;
+    }
+
+    .navbar-item .navbar-link {
+        margin: 10px auto ;
     }
 }
 
