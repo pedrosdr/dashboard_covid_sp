@@ -195,7 +195,7 @@ ggplotly(
   tooltip = 'text'
 )
 
-# INCORPORADO
+# SUBSTITUIDO
 ggplotly(
   totals %>% ggplot(aes(
                         x=municipio, 
@@ -218,7 +218,7 @@ ggplotly(
   tooltip = 'text'
 )
 
-# INCORPORADO
+# SUBSTITUIDO
 ggplotly(
   totals %>% ggplot(aes(
                       x=municipio, 
@@ -239,7 +239,7 @@ ggplotly(
   tooltip = 'text'
 )
 
-# INCORPORADO
+# SUBSTITUIDO
 ggplotly(
   totals %>% 
     ggplot(aes(
@@ -311,7 +311,7 @@ ggplotly(
 )
 
 
-# incorporando
+# INCORPORADO
 ggplotly(
   s %>% ggplot(aes(
     x=data, 
@@ -334,4 +334,58 @@ ggplotly(
     ) +
     theme(plot.title = element_text(hjust = 0.5)),
   tooltip = 'text'
+)
+
+# INCORPORADO
+ggplotly(
+  s %>% ggplot(
+   aes(
+     x = municipio,
+     y = casos_por_habitante * 100,
+     group = municipio,
+     fill = municipio
+   ) 
+  ) +
+    geom_boxplot() +
+    labs(
+      x = NULL,
+      y = 'Casos / habitante (%)'
+    ) +
+    theme(legend.position = "none")
+)
+
+# INCORPORADO
+ggplotly(
+  s %>% ggplot(
+    aes(
+      x = municipio,
+      y = obitos_por_habitante * 100,
+      group = municipio,
+      fill = municipio
+    ) 
+  ) +
+    geom_boxplot(size = 0.5) +
+    labs(
+      x = NULL,
+      y = 'Óbitos / habitante (%)'
+    ) +
+    theme(legend.position = "none")
+)
+
+# INCORPORADO
+ggplotly(
+  s %>% ggplot(
+    aes(
+      x = municipio,
+      y = obitos_por_caso * 100,
+      group = municipio,
+      fill = municipio
+    ) 
+  ) +
+    geom_boxplot(size = 0.5) +
+    labs(
+      x = NULL,
+      y = 'Óbitos / caso (%)'
+    ) +
+    theme(legend.position = "none")
 )

@@ -31,7 +31,6 @@ function(input, output, session) {
         labs(
           x=NULL, 
           y='Número de casos', 
-          title='Evolução dos casos por município',
           color = 'Município',
         ) +
         theme(plot.title = element_text(hjust = 0.5)),
@@ -60,51 +59,31 @@ function(input, output, session) {
           x=NULL,
           y='Número de óbitos',
           color='Município',
-          title='Evolução dos óbitos por muncípio'
         ) +
         theme(plot.title = element_text(hjust=0.5)),
       tooltip = 'text'
     )
   }) # END CHART(LINE): evolução dos óbitos por município
   
-  # CHART(BAR): média de óbitos por habitante
+  # CHART(BAR): variação de óbitos por habitante
   output$chart_obitos_por_habitante = renderPlotly({
-    totals = s() %>% 
-      arrange(municipio, data) %>%
-      group_by(municipio) %>%
-      summarise(
-        total_casos = max(casos),
-        total_obitos = max(obitos),
-        media_obitos_por_caso = mean(obitos_por_caso),
-        media_casos_por_habitante = mean(casos_por_habitante),
-        media_obitos_por_habitante = mean(obitos_por_habitante)
-      )
-    
     ggplotly(
-      totals %>% 
-        ggplot(aes(
-                x=municipio, 
-                y=media_obitos_por_habitante,
-                fill = municipio,
-                text=sprintf(
-                  'Óbitos/habitante: %.4f<br>Município: %s', 
-                  media_obitos_por_habitante, 
-                  municipio
-                )
-              )
-        ) +
-        geom_col() +
-        scale_y_continuous(labels = label_number(scale=1)) +
+      s() %>% ggplot(
+        aes(
+          x = municipio,
+          y = obitos_por_habitante * 100,
+          group = municipio,
+          fill = municipio
+        ) 
+      ) +
+        geom_boxplot(size = 0.5) +
         labs(
-          title='Média de óbitos por habitante',
-          y='Média de óbitos por habitante',
-          x=NULL
+          x = NULL,
+          y = 'Óbitos / habitante (%)'
         ) +
-        theme(legend.position = "none") +
-        theme(plot.title = element_text(hjust=0.5)),
-      tooltip = 'text'
+        theme(legend.position = "none")
     )
-  }) # END CHART(BAR): média de óbitos por habitante
+  }) # END CHART(BAR): variação de óbitos por habitante
   
   # CHART(LINE): evolução dos óbitos por caso registrado
   output$chart_evol_obitos_por_caso = renderPlotly({
@@ -112,12 +91,12 @@ function(input, output, session) {
     ggplotly(
       s() %>% ggplot(aes(
                         x=data, 
-                        y=obitos_por_caso, 
+                        y=obitos_por_caso * 100, 
                         group=municipio, 
                         color=municipio,
                         text = sprintf(
-                          'Óbitos por caso: %.4f<br>Data: %s<br>Município: %s', 
-                          obitos_por_caso, 
+                          'Óbitos por caso: %.2f%%<br>Data: %s<br>Município: %s', 
+                          obitos_por_caso * 100, 
                           format(data, '%d/%m/%Y'),
                           municipio
                         )
@@ -126,8 +105,7 @@ function(input, output, session) {
         geom_line(size=1) +
         labs(
           x=NULL, 
-          y='Número de óbitos por caso', 
-          title='Evolução do número de óbitos por caso registrado',
+          y='Óbitos / caso (%)',
           color = 'Município') +
         theme(plot.title = element_text(hjust = 0.5)) +
         scale_x_date(labels = date_format('%d/%m/%Y')),
@@ -141,12 +119,12 @@ function(input, output, session) {
     ggplotly(
       s() %>% ggplot(aes(
         x=data, 
-        y=casos_por_habitante, 
+        y=casos_por_habitante * 100, 
         group=municipio, 
         color=municipio,
         text = sprintf(
-          'Casos/habitante: %.4f<br>Data: %s<br>Município: %s',
-          casos_por_habitante,
+          'Casos / habitante: %.2f%%<br>Data: %s<br>Município: %s',
+          casos_por_habitante * 100,
           format(data, '%d/%m/%Y'),
           municipio)
       )
@@ -154,8 +132,7 @@ function(input, output, session) {
         geom_line(size=1) +
         labs(
           x=NULL, 
-          y='Casos/habitante', 
-          title='Evolução dos casos/habitante',
+          y='Casos / habitante (%)',
           color = 'Município',
         ) +
         theme(plot.title = element_text(hjust = 0.5)),
@@ -169,12 +146,12 @@ function(input, output, session) {
     ggplotly(
       s() %>% ggplot(aes(
         x=data, 
-        y=obitos_por_habitante, 
+        y=obitos_por_habitante * 100, 
         group=municipio, 
         color=municipio,
         text = sprintf(
-          'Óbitos/habitante: %.4f<br>Data: %s<br>Município: %s',
-          obitos_por_habitante,
+          'Óbitos / habitante: %.2f%%<br>Data: %s<br>Município: %s',
+          obitos_por_habitante * 100,
           format(data, '%d/%m/%Y'),
           municipio)
       )
@@ -182,8 +159,7 @@ function(input, output, session) {
         geom_line(size=1) +
         labs(
           x=NULL, 
-          y='Óbitos/habitante', 
-          title='Evolução dos Óbitos/habitante',
+          y='Óbitos / habitante (%)',
           color = 'Município',
         ) +
         theme(plot.title = element_text(hjust = 0.5)),
@@ -216,7 +192,6 @@ function(input, output, session) {
         geom_col() +
         scale_y_continuous(labels = label_number(scale=1)) +
         labs(
-          title='Total de casos por município',
           y='Total de casos',
           x=NULL
         ) +
@@ -252,7 +227,6 @@ function(input, output, session) {
         geom_col() +
         scale_y_continuous(labels = label_number(scale=1)) +
         labs(
-          title='Total de óbitos por município',
           y='Total de óbitos',
           x=NULL
         ) +
@@ -262,71 +236,43 @@ function(input, output, session) {
     )
   }) # END CHART(BAR): Total de óbitos por município
   
-  # CHART(BAR): Média de casos por habitante
+  # CHART(BAR): Variação de casos por habitante
   output$chart_casos_por_habitante = renderPlotly({
-    totals = s() %>% 
-      arrange(municipio, data) %>%
-      group_by(municipio) %>%
-      summarise(
-        total_casos = max(casos),
-        total_obitos = max(obitos),
-        media_obitos_por_caso = mean(obitos_por_caso),
-        media_casos_por_habitante = mean(casos_por_habitante),
-        media_obitos_por_habitante = mean(obitos_por_habitante)
-      )
-    
     ggplotly(
-      totals %>% ggplot(aes(
-        x=municipio, 
-        y=media_casos_por_habitante, 
-        fill=municipio,
-        text=sprintf('Casos/habitante: %.4f<br>Município: %s',
-                     media_casos_por_habitante,
-                     municipio))) +
-        geom_col() +
-        scale_y_continuous(labels = label_number(scale=1)) +
+      s() %>% ggplot(
+        aes(
+          x = municipio,
+          y = casos_por_habitante * 100,
+          group = municipio,
+          fill = municipio
+        ) 
+      ) +
+        geom_boxplot() +
         labs(
-          title='Média de casos por habitante',
-          y='Média de casos por habitante',
-          x=NULL
+          x = NULL,
+          y = 'Casos / habitante (%)'
         ) +
-        theme(legend.position = "none") +
-        theme(plot.title = element_text(hjust=0.5)),
-      tooltip = 'text'
+        theme(legend.position = "none")
     )
-  })# END CHART(BAR): Média de óbitos por caso
+  })# END CHART(BAR): Variação de casos por habitante
   
-  # CHART(BAR): Média de casos por habitante
+  # CHART(BAR): Média de Óbitos por caso
   output$chart_obitos_por_caso  = renderPlotly({
-    totals = s() %>% 
-      arrange(municipio, data) %>%
-      group_by(municipio) %>%
-      summarise(
-        total_casos = max(casos),
-        total_obitos = max(obitos),
-        media_obitos_por_caso = mean(obitos_por_caso),
-        media_casos_por_habitante = mean(casos_por_habitante),
-        media_obitos_por_habitante = mean(obitos_por_habitante)
-      )
-      
     ggplotly(
-      totals %>% ggplot(aes(
-        x=municipio, 
-        y=media_obitos_por_caso, 
-        fill=municipio,
-        text=sprintf('óbitos/caso: %.4f<br>Município: %s',
-                     media_obitos_por_caso,
-                     municipio))) +
-        geom_col() +
-        scale_y_continuous(labels = label_number(scale=1)) +
+      s() %>% ggplot(
+        aes(
+          x = municipio,
+          y = obitos_por_caso * 100,
+          group = municipio,
+          fill = municipio
+        ) 
+      ) +
+        geom_boxplot(size = 0.5) +
         labs(
-          title='Média de óbitos por caso',
-          y='Média de óbitos por caso',
-          x=NULL
+          x = NULL,
+          y = 'Óbitos / caso (%)'
         ) +
-        theme(legend.position = "none") +
-        theme(plot.title = element_text(hjust=0.5)),
-      tooltip = 'text'
+        theme(legend.position = "none")
     )
     
   })# END CHART(BAR): Média de óbitos por caso
@@ -350,24 +296,23 @@ function(input, output, session) {
       totals %>% 
         ggplot(
           aes(
-            y = total_obitos_por_habitante,
-            x = total_casos_por_habitante,
+            y = total_obitos_por_habitante * 100,
+            x = total_casos_por_habitante * 100,
             group = municipio,
             fill = municipio,
             text = sprintf(
-              'Município: %s<br>Óbitos/habitante: %.4f<br>Casos/habitante: %.4f',
+              'Município: %s<br>Óbitos/habitante: %.2f%%<br>Casos/habitante: %.2f%%',
               municipio,
-              total_obitos_por_habitante,
-              total_casos_por_habitante
+              total_obitos_por_habitante * 100,
+              total_casos_por_habitante * 100
             )
           )
         ) +
         geom_point(size = 3) +
         labs(
-          x = 'Casos/habitante',
-          y = 'Óbitos/habitante',
+          x = 'Casos / habitante (%)',
+          y = 'Óbitos / habitante (%)',
           fill = 'Município',
-          title = 'Valores máximos de casos e óbitos por habitante'
         ),
       tooltip = 'text'
     )

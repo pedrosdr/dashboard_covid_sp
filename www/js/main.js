@@ -1,5 +1,3 @@
-let on = true
-
 $(document).ready(e => {
     // adding page title
     $.get('../title.html', html => {

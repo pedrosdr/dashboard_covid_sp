@@ -1,11 +1,11 @@
 Evolução dos casos
 Total de casos
 Evolução dos casos por habitante
-Média de casos por habitante
+Variação de casos por habitante
 Evolução dos óbitos
 Total de óbitos
 Evolução dos óbitos por habitante
-Média de óbitos por habitante
+Variação de óbitos por habitante
 Evolução do número de óbitos por caso registrado
-Média de óbitos por caso
+Variação de óbitos por caso
 Valores máximos de casos e óbitos por habitante
