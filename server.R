@@ -1,4 +1,4 @@
-# source('utils.R')
+source('utils.R')
 
 function(input, output, session) {
   

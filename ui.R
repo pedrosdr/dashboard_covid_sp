@@ -1,4 +1,4 @@
-# source('utils.R')
+source('utils.R')
 
 sidebar_size = '300px'
 
@@ -35,7 +35,7 @@ sidebar = dashboardSidebar(
       dateInput('inicial_date',
                 label = 'Data inicial:',
                 format = 'dd/mm/yyyy',
-                value = min(data$data),
+                value = as.Date('2021-01-01'),
                 min = min(data$data),
                 max = max(data$data)
                 )
