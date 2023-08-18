@@ -84,10 +84,25 @@ header.main-header {
 
 .skin-blue .main-header .navbar .sidebar-toggle {
     background-color: transparent;
+    border-radius: 30%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px 0 0 3px;
 }
 
 .skin-blue .main-header .navbar .sidebar-toggle:hover {
     background-color: transparent;
+}
+
+@media(max-width: 767px) {
+    .skin-blue .main-header .navbar .sidebar-toggle,
+    .skin-blue .main-header .navbar .sidebar-toggle:hover
+     {
+        background-color: rgb(32, 33, 35, 0.5);
+    }
 }
 
 @media(hover: hover)
